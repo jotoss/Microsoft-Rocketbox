@@ -1,5 +1,5 @@
 #
-# Import Microsoft-Rocketbox avatars into Unreal Engine with material instances
+# Import Microsoft Rocketbox avatars into Unreal Engine with material instances
 #
 # Requirements: Unreal Engine 4.24
 # 
@@ -8,14 +8,12 @@
 # 2. Copy "Rocketbox" folder which contains the master material .uasset files to your Unreal project filesystem content folder (RocketboxImport/Content).
 #    The following folder should then contain the .uasset files: RocketboxImport/Content/Rocketbox/Materials/
 # 3. Open Unreal project and enable "Python" and "Editor Scripting Utilities" plugins, then restart editor.
-# 4. Download/clone the Microsoft-Rocketbox repository: https://github.com/microsoft/Microsoft-Rocketbox
-# 5. Copy this Python file to Microsoft-Rocketbox filesystem folder
-# 6. Run this Python script from the Microsoft-Rocketbox folder with UnrealEditor>File>Execute Python Script
-# 7. Save all remaining new assets with UnrealEditor>Content Browser>Save All
+# 4. Run this Python script with UnrealEditor>File>Execute Python Script
+# 5. Save all remaining new assets with UnrealEditor>Content Browser>Save All
 #
 # Notes:
 #   + Already existing assets will not be reimported or regenerated unless you delete them from Unreal Editor
-#   + Tested with Unreal Engine 4.24
+#   + Tested with Unreal Engine 4.24 on Windows 10
 #
 # TODO:
 #   + Proper use of opacity textures in material (currently fully transparent)
@@ -26,7 +24,7 @@ import os
 import re
 import unreal
 
-rocketbox_root = os.path.dirname(os.path.normpath(__file__))
+rocketbox_root = os.path.normpath(os.path.join(os.path.dirname(__file__), "../../.."))
 rocketbox_root_unreal = "/Game/Rocketbox"
 
 def import_textures(rocketbox_root, rocketbox_root_unreal):
@@ -218,6 +216,7 @@ def import_fbx(data_root):
 if __name__ == '__main__':        
     unreal.log("============================================================")
     unreal.log("Running: %s" % __file__)
+    unreal.log("rocketbox_root: " + rocketbox_root)
 
     # Import textures into Unreal
     imported_textures_info = import_textures(rocketbox_root, rocketbox_root_unreal)
